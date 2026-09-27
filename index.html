@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Ege Saraç</title>
+    <meta name="description" content="exercise session materials" />
+
+    <style>
+        :root{
+            --bg:#071427;
+            --panel:#0b1d36;
+            --text:#eaf1ff;
+            --muted:rgba(234,241,255,.72);
+            --border:rgba(234,241,255,.12);
+            --accent:#7fb2ff;
+            --shadow:0 20px 60px rgba(0,0,0,.35);
+            --ring:0 0 0 3px rgba(127,178,255,.22);
+            --radius:18px;
+        }
+        [data-theme="light"]{
+            --bg:#f6f9ff;
+            --panel:#ffffff;
+            --text:#0b1630;
+            --muted:rgba(11,22,48,.7);
+            --border:rgba(11,22,48,.12);
+            --accent:#1f5fff;
+            --shadow:0 18px 55px rgba(10,30,70,.12);
+            --ring:0 0 0 3px rgba(31,95,255,.14);
+        }
+
+        *{box-sizing:border-box}
+        body{
+            margin:0;
+            font-family:system-ui,Segoe UI,Roboto,Arial;
+            background:var(--bg);
+            color:var(--text);
+        }
+
+        a{color:var(--accent);text-decoration:none}
+        a:hover{text-decoration:underline}
+
+        .wrap{max-width:1100px;margin:auto;padding:28px}
+
+        header{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            margin-bottom:32px;
+        }
+
+        .btn{
+            border:1px solid var(--border);
+            padding:10px 14px;
+            border-radius:999px;
+            background:rgba(255,255,255,.05);
+            cursor:pointer;
+            color:var(--text);
+        }
+        .btn:focus{outline:none; box-shadow: var(--ring)}
+
+        .card{
+            border:1px solid var(--border);
+            border-radius:var(--radius);
+            background:var(--panel);
+            box-shadow:var(--shadow);
+        }
+        .inner{padding:16px}
+
+        .sectionTitle{
+            font-size:13px;
+            text-transform:uppercase;
+            letter-spacing:.12em;
+            color:var(--muted);
+            margin:0 0 10px;
+        }
+
+        /* Top row */
+        .topRow{
+            display:flex;
+            gap:16px;
+            margin-bottom:16px;
+            align-items:stretch;
+        }
+        .topRow > .card{
+            box-shadow:none;
+            background:rgba(255,255,255,.02);
+        }
+        .topLeft{
+            flex: 0 0 340px;
+            min-width: 260px;
+        }
+        .topRight{
+            flex: 1 1 auto;
+            min-width: 260px;
+        }
+        @media(max-width:900px){
+            .topRow{flex-direction:column}
+            .topLeft,.topRight{flex:1 1 auto}
+        }
+
+        .avatarRow{
+            display:flex;
+            align-items:center;
+        }
+
+        .miniMeta{
+            font-size:13px;
+            color:var(--muted);
+            line-height:1.45;
+            margin-top:4px;
+        }
+
+        .tagRow{
+            display:flex;
+            flex-wrap:wrap;
+            gap:8px;
+            margin-top:12px;
+        }
+        .tag{
+            border:1px solid var(--border);
+            border-radius:999px;
+            padding:6px 10px;
+            font-size:12px;
+            color:var(--text);
+            background:rgba(255,255,255,.03);
+            display:inline-flex;
+            align-items:center;
+            gap:8px;
+            white-space:nowrap;
+        }
+        .tag span{color:var(--muted)}
+
+        /* General info */
+        .infoGrid{
+            display:grid;
+            grid-template-columns: 1fr 1fr;
+            gap:10px 14px;
+            margin-top:6px;
+        }
+        @media(max-width:520px){
+            .infoGrid{grid-template-columns:1fr}
+        }
+        .infoItem{
+            padding:10px 12px;
+            border:1px solid var(--border);
+            border-radius:12px;
+            background:rgba(255,255,255,.03);
+        }
+        .infoLabel{
+            font-size:12px;
+            text-transform:uppercase;
+            letter-spacing:.10em;
+            color:var(--muted);
+            margin-bottom:6px;
+        }
+        .infoValue{
+            font-size:14px;
+            color:var(--text);
+            line-height:1.35;
+        }
+
+        /* Announcements */
+        .announcements,
+        .additionalmaterial{
+            border:1px solid var(--border);
+            border-radius:12px;
+            padding:12px;
+            background:rgba(255,255,255,.04);
+            margin: 4px 0 16px;
+        }
+
+        .announcements ul,
+        .additionalmaterial ul{
+            margin:0;
+            padding-left:18px;
+            color:var(--muted);
+            line-height:1.6;
+        }
+
+        .announcements li strong{
+            color: var(--text);
+            font-weight: 650;
+        }
+
+        /* Table */
+        table{
+            width:100%;
+            border-collapse:collapse;
+            border:1px solid var(--border);
+            border-radius:12px;
+            overflow:hidden;
+            table-layout: fixed;
+        }
+        th,td{
+            padding:12px 12px;
+            border-bottom:1px solid var(--border);
+            vertical-align:middle;
+            text-align:left;
+            overflow:hidden;
+            text-overflow:ellipsis;
+        }
+        th{
+            font-size:12px;
+            text-transform:uppercase;
+            color:var(--muted);
+            letter-spacing:.08em;
+            background:rgba(255,255,255,.02);
+            white-space:nowrap;
+        }
+        td{white-space:nowrap}
+        tbody tr:last-child td{border-bottom:none}
+
+        footer{
+            margin-top:18px;
+            text-align:center;
+            color:var(--muted);
+            font-size:13px;
+            padding:18px 0 8px;
+        }
+    </style>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6M7X1C55SR"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-6M7X1C55SR');
+    </script>
+
+</head>
+
+<body>
+<div class="wrap">
+    <header>
+        <h2 style="margin:0;">Personal Homepage</h2>
+        <button class="btn" onclick="toggleTheme()">🌙 Dark</button>
+    </header>
+
+    <main class="card">
+        <div class="inner">
+
+            <div class="topRow">
+                <!-- Profile Card -->
+                <section class="card topLeft">
+                    <div class="inner">
+                        <div class="avatarRow">
+                            <div>
+                                <div style="font-weight:700;font-size:16px;">Ege Saraç</div>
+                                <div class="miniMeta">
+                                    BSc Computer Science (ETH Zürich)<br/>
+                                    Zurich, Switzerland · <a href="mailto:esarac@ethz.ch">esarac@ethz.ch</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tagRow">
+                            <a class="tag" href="https://www.linkedin.com/in/ege-sara%C3%A7/"><span>💼</span> LinkedIn</a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- General Info -->
+                <section class="card topRight">
+                    <div class="inner">
+                        <h3 class="sectionTitle" style="margin-bottom:12px;">General Info</h3>
+
+                        <div class="infoGrid">
+                            <div class="infoItem">
+                                <div class="infoLabel">Exercise Time</div>
+                                <div class="infoValue">Monday 16:15–18:00</div>
+                                <div class="infoValue">Tuesday 14:15–16:00</div>
+                            </div>
+
+                            <div class="infoItem">
+                                <div class="infoLabel">Location</div>
+                                <div class="infoValue">ML F34</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Announcements -->
+            <h3 class="sectionTitle">Announcements</h3>
+            <div class="announcements">
+                <ul>
+                    <li>
+
+                        <a href="https://metaphor.ethz.ch/x/2026/fs/401-0614-00L/" target="_blank" rel="noopener noreferrer">
+                            Link
+                        </a>
+                        to the course website
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Additional Material -->
+            <h3 class="sectionTitle">Additional Material</h3>
+            <div class="additionalmaterial">
+                <ul>
+                    <li>
+
+                        <a href="WuS25_Cheatsheet.pdf" target="_blank" rel="noopener noreferrer">
+                            My Cheatsheet FS25
+                        </a>
+                        (I strongly suggest you to use this only as an inspiration. I do not guarantee correctness.)
+                    </li>
+                    <li>
+
+                        <a href="summary-kuenzi.pdf" target="_blank" rel="noopener noreferrer">
+                            Summary of Yanik Künzi
+                        </a>
+                         (content may differ so only use as a secondary material)
+                    </li>
+
+                    <li>
+
+                        <a href="skript-taisson.pdf" target="_blank" rel="noopener noreferrer">
+                            Script of Prof. Taisson
+                        </a>
+                        (almost identical to current lecture)
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Materials table -->
+            <h3 class="sectionTitle">Exercise Session Materials</h3>
+            <table>
+                <colgroup>
+                    <col style="width:22%;">
+                    <col style="width:56%;">
+                    <col style="width:22%;">
+                </colgroup>
+
+                <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Topic</th>
+                    <th>Material</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr>
+                    <td>26/05/2026</td>
+                    <td>Final Kahoot </td>
+                    <td><a class="tag" href="https://create.kahoot.it/share/wus-final-kahoot/c96acdd9-e132-4e9d-bff2-ef6ab81ed25a" target="_blank" rel="noreferrer">Open</a></td>
+                </tr>
+                <tr>
+                    <td>26/05/2026</td>
+                    <td>Week 13 </td>
+                    <td><a class="tag" href="week-13_with-solutions.pdf" target="_blank" rel="noreferrer">Open</a></td>
+                </tr>
+                <tr>
+                    <td>18/05/2026</td>
+                    <td>Week 12 </td>
+                    <td><a class="tag" href="week-12_with-solutions.pdf" target="_blank" rel="noreferrer">Open</a></td>
+                </tr>
+                <tr>
+                    <td>11/05/2026</td>
+                    <td>Week 11 </td>
+                    <td><a class="tag" href="week-11_with-solutions.pdf" target="_blank" rel="noreferrer">Open</a></td>
+                </tr>
+                <tr>
+                    <td>04/05/2026</td>
+                    <td>Week 10 </td>
+                    <td><a class="tag" href="week-10_with-solutions.pdf" target="_blank" rel="noreferrer">Open</a></td>
+                </tr>
+                <tr>
+                    <td>27/04/2026</td>
+                    <td>Week 9 </td>
+                    <td><a class="tag" href="week-9_with-solutions.pdf" target="_blank" rel="noreferrer">Open</a></td>
+                </tr>
+                <tr>
+                    <td>21/04/2026</td>
+                    <td>Week 8 </td>
+                    <td><a class="tag" href="week-8_with-solutions.pdf" target="_blank" rel="noreferrer">Open</a></td>
+                </tr>
+                <tr>
+                    <td>13/04/2026</td>
+                    <td>Week 7 </td>
+                    <td><a class="tag" href="week-7_with-solutions.pdf" target="_blank" rel="noreferrer">Open</a></td>
+                </tr>
+                <tr>
+                    <td>30/03/2026</td>
+                    <td>Week 6 </td>
+                    <td><a class="tag" href="week-6_with-solutions.pdf" target="_blank" rel="noreferrer">Open</a></td>
+                </tr>
+                <tr>
+                    <td>23/03/2026</td>
+                    <td>Week 5 </td>
+                    <td><a class="tag" href="week-5_with-solutions.pdf" target="_blank" rel="noreferrer">Open</a></td>
+                </tr>
+                <tr>
+                    <td>16/03/2026</td>
+                    <td>Week 4 </td>
+                    <td><a class="tag" href="week-4_with-solutions.pdf" target="_blank" rel="noreferrer">Open</a></td>
+                </tr>
+                <tr>
+                    <td>09/03/2026</td>
+                    <td>Week 3 </td>
+                    <td><a class="tag" href="week-3_with-solutions.pdf" target="_blank" rel="noreferrer">Open</a></td>
+                </tr>
+                <tr>
+                    <td>02/03/2026</td>
+                    <td>Week 2 </td>
+                    <td><a class="tag" href="Week-2_with-solutions.pdf" target="_blank" rel="noreferrer">Open</a></td>
+                </tr>
+                <tr>
+                    <td>23/02/2026</td>
+                    <td>Week 1 </td>
+                    <td><a class="tag" href="week-1-with-solutions.pdf" target="_blank" rel="noreferrer">Open</a></td>
+                </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+    </main>
+
+    <footer>
+        © <span id="year"></span> Ege Saraç · ETH Zürich
+    </footer>
+</div>
+
+<script>
+    function toggleTheme(){
+        const root = document.documentElement;
+        const btn  = document.querySelector("header button");
+        if(root.dataset.theme === "dark"){
+            root.dataset.theme = "light";
+            btn.textContent = "☀️ Light";
+        }else{
+            root.dataset.theme = "dark";
+            btn.textContent = "🌙 Dark";
+        }
+    }
+    document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
