@@ -306,6 +306,12 @@
 
                 <tbody>
                 <tr>
+                    <td>05/09/2026</td>
+                    <td>Week 3 </td>
+                    <td><a class="tag" href="Session 3 Notes.pdf" target="_blank" rel="noreferrer">Open</a></td>
+                    <td><button class="tag" onclick="downloadWeek3()">Download Images</button></td>
+                </tr>
+                <tr>
                     <td>28/09/2026</td>
                     <td>Week 2 </td>
                     <td><a class="tag" href="Session 2 Notes.pdf" target="_blank" rel="noreferrer">Open</a></td>
@@ -339,6 +345,26 @@
         }
     }
     document.getElementById("year").textContent = new Date().getFullYear();
+    
+    function downloadWeek3(){
+        const files = [
+            "M = 8.png",
+            "M = 16.png",
+            "M = 128.png"
+        ];
+
+        files.forEach((file, index) => {
+            setTimeout(() => {
+                const link = document.createElement("a");
+                link.href = file;
+                link.download = file;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }, index * 300);
+        });
+    }
+
 </script>
 </body>
 </html>
